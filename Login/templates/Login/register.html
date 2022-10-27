@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
          <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
-        <title>Login</title>
+        <title>register</title>
         
 
     </head>
@@ -19,21 +19,20 @@
             </div>
         
             <!-- Login Form -->
-            <form action="/temp" method="post">
+            <form action="" method="POST">
             {% csrf_token %}  
-              <input type="text" id="username" class="fadeIn second" name="username" placeholder="User Name" Required>
-              <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" Required>
+              {{form.username}}
+              {{form.email}}
+              {{form.password1}}
+              {{form.password2}}
 
-              {% for message in messages %}
-               <p class="message"> {{message}}</p>
-              {% endfor %}
-              <button type="submit" class="fadeIn fourth" value="Log In">Login</button>
+              {{form.errors}}
+              <button type="submit" class="fadeIn fifth" value="Log In">Register</button>
             </form>
         
-            
-            
         
           </div>
         </div>
-    </body>    
+   
+ </body>    
 </html>

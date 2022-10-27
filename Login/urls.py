@@ -8,5 +8,6 @@ from . import views
 
 urlpatterns = [
     path("",views.index, name="index"),
-    path("temp", views.temp, name="temp")
+    path("temp", views.temp, name="temp"),
+    path("register", views.register, name="register")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
