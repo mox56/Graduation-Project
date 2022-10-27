@@ -2,14 +2,9 @@
 {% load static %}
 <html lang="en">
     <head>
-
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        
+         <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
         <title>Login</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
+        
 
     </head>
     <body>
@@ -24,16 +19,15 @@
             </div>
         
             <!-- Login Form -->
-            <form>
-              <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-              <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-              <input type="submit" class="fadeIn fourth" value="Log In">
+            <form action="/temp" method="post">
+            {% csrf_token %}  
+              <input type="text" id="username" class="fadeIn second" name="username" placeholder="User Name" Required>
+              <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" Required>
+              <button type="submit" class="fadeIn fourth" value="Log In">Login</button>
             </form>
         
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-              <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
+            
+            
         
           </div>
         </div>

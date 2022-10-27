@@ -8,5 +8,5 @@ from . import views
 
 urlpatterns = [
     path("",views.index, name="index"),
-    #path("ComputerScience", views.cs, name="ComputerScience")
+    path("temp", views.temp, name="temp")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
