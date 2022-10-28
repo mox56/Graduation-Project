@@ -19,15 +19,15 @@
             </div>
         
             <!-- Login Form -->
-            <form action="/temp" method="post">
+            <form action="" method="POST">
             {% csrf_token %}  
               <input type="text" id="username" class="fadeIn second" name="username" placeholder="User Name" Required>
-              <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" Required>
+              <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" Required>
 
               {% for message in messages %}
                <p class="message"> {{message}}</p>
               {% endfor %}
-              <button type="submit" class="fadeIn fourth" value="Log In">Login</button>
+              <input type="submit" class="fadeIn fourth" value="LogIn">
             </form>
         
             

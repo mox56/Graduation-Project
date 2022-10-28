@@ -2,9 +2,10 @@ from http.client import HTTPResponse
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from .forms import   CreateUserForm
@@ -12,42 +13,53 @@ from .forms import   CreateUserForm
 
 
 def register (request):
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('temp')
+    else:
+        form = CreateUserForm()
+        
+        if request.method =='POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for '+ user)
+                
+                return redirect('loginUser')
+        
+        
+        
+        context= {'form':form}
+        return render(request, "Login/register.html", context)
+        
     
-    if request.method =='POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for '+ user)
+    
+def loginUser(request):
+    if request.user.is_authenticated:
+        return redirect('cs')
+    else:
+        if request.method== 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
             
-            return redirect('index')
-    
-    
-    
-    context= {'form':form}
-    return render(request, "Login/register.html", context)
-    
-    
-    
-def index(request):
-    
-    if request.method== 'POST':
-        username= request.POST['username']
-        password= request.POST['password']
-        fname= user.first_name
-        
-        user = authenticate(username = username , password=password)
-        
-        if user is not None:
-            login(request, user)
-            return render(request, "Login/temp.html", {'fname':fname})
+            user = authenticate(request, username=username, password=password)
             
-        else:
-            messages.error(request, "Wrong credentials")
-            return redirect(index)
         
-    return render(request, "Login/login.html")
+            
+            if user is not None:
+                login(request, user)
+                return redirect('cs')
+                
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+                
+        context = {}    
+        return render(request, "Login/login.html", context)
 
-def temp(request):
-    return render(request, "Login/temp.html")
+def logoutUser(request):
+    logout(request)
+    return redirect(loginUser)
+
+@login_required(login_url='login')
+def ComputerScience(request):
+    return render(request, "Login/cs.html")
