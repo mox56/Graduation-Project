@@ -1,15 +1,41 @@
-<!DOCTYPE>
-<html lang="en">
-    <head>
-        <title>CS</title>
-    </head>
-    <body>
-        <h1> Computer Science</h1>
+{% extends 'Login/main.html' %}
 
-        {% if user.is_authenticated%}
-        <h3>Hello {{ request.user }} </h3>
-        <span><a href="{% url 'logout'%}">Logout</a></span>
+{% block content%}
+<h1 class='header'> Computer science</h1>
 
-        {% endif %}
-    </body>
-</html>
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Index</th>
+      <th scope="col">Name</th>
+      <th scope="col">GPA</th>
+      <th scope="col">CGPA</th>
+      <th scope="col">Semester</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+
+      {% for i in students %}
+        <tr>
+        
+            <td>{{i.index}}</td>
+            
+            
+            <td>{{i.name}}</td>
+    
+            
+            <td>3</td>
+
+            
+            <td>4</td>
+
+            
+            <td>{{i.Semester}}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+{% endblock content %}

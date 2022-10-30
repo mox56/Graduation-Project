@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
+from Login.models import Student
+
 # Create your views here.
 from .forms import   CreateUserForm
 
@@ -62,4 +64,6 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def ComputerScience(request):
-    return render(request, "Login/cs.html")
+    students=Student.objects.all()
+    return render(request, "Login/cs.html", {'students':students})
+
