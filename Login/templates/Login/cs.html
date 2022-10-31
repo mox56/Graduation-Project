@@ -1,11 +1,9 @@
 {% extends 'Login/main.html' %}
 
 {% block content%}
-<div class='tb'>
-<h1 class='header'> Computer science</h1>
 
-
-  <table class="table">
+<div>
+  <table>
   <thead>
     <tr>
       <th scope="col">Index</th>
@@ -19,7 +17,7 @@
   <tbody>
 
       {% for i in students %}
-        <tr>
+        <tr scope="row">
         
             <td>{{i.index}}</td>
             
@@ -38,6 +36,6 @@
     {% endfor %}
   </tbody>
 </table>
-</div>
 
+</div>
 {% endblock content %}
