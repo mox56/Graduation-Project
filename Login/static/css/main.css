@@ -9,7 +9,7 @@
 
 }
 
-html{
+.Tb{
     position: absolute;
     top: 0;
     left: 0;
@@ -17,8 +17,9 @@ html{
     bottom: 0;
     z-index: 1;
     opacity: .7;
-    background: rgb(36, 13, 0);
-    background: linear-gradient(90deg, rgba(36, 13, 0, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(221, 120, 12, 1) 100%);
+    background-color: #bdbdbd;
+    /*background: rgb(36, 13, 0);*/
+    /*background: linear-gradient(90deg, rgba(36, 13, 0, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(221, 120, 12, 1) 100%);*/
 }
 
 table{
@@ -29,9 +30,8 @@ table{
     transform: translate(-50%,-50%);
     border-radius: 12px 12px 0px 0px;
     width: 60%;
-    
     box-shadow: 0 5px 12px rgba(32, 32, 32, .3);
-    background: #fafafa;    
+    background: #e0e0e0;    
     text-align: center;
     border-collapse: collapse;
     border-spacing: 0;
@@ -64,17 +64,24 @@ li, a, button{
     text-decoration: none;
 }
 
+
 header{
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;
-    
-    background: linear-gradient(90deg, rgba(221, 120, 12, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(36, 13, 0, 1) 100%);
+    padding: 10px 10%;
+    background: rgb(36, 13, 0);
+    background: linear-gradient(90deg, rgba(221, 120, 12, 0.6) 0%, rgba(121, 37, 9, 0.8) 41%, rgba(36, 13, 0, 0.8) 90%);
+    border-bottom: 1px solid #676767;
+    z-index: 2;
+    box-shadow: 0 5px 12px rgba(32, 32, 32, .7);
 }
 
 .logo{
     cursor: pointer;
+    height: 150px;
+    
 }
 
 .nav__links{
