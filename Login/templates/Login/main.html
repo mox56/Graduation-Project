@@ -4,6 +4,7 @@
 <head>
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+	<script type=text/javascript src="{% static 'js/main.js' %}"></script>
 	
 <title>Main</title>
 
@@ -14,21 +15,21 @@
 
 </head>
 <body>
-	<div class=HD>
+	
 	<header>
 		<img class="logo" src="{% static '/images/fulogo.png' %}" alt="logo">
 		<nav>
 			<ul class="nav__links">
 
-				<li><a href="#">Students</a></li>
-				<li><a href="#">Exam Results</a></li>
-				<li><a href="#">F&Z Submission</a></li>
+				<li><button data-page="students">Students</button></li>
+				<li><button data-page="results">Exam Results</button></li>
+				<li data-page="F&Z">F&Z Submission</a></li>
 
 			</ul>
 		</nav>
-		<button class="neu-btn"> Log Out<a class="cta" href="#"></a></button>
+		<a class="cta" href="{% url 'logout'%}"><button class="neu-btn"> Log Out</button></a>
 	</header>
-</div>
+
 {% block content%}
 
 

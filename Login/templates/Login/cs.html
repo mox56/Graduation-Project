@@ -2,7 +2,7 @@
 
 {% block content%}
 
-<div class="Tb">
+<div class="Tb" id="students">
   <table>
   <thead>
     <tr>
@@ -37,4 +37,43 @@
   </tbody>
 </table>
 </div>
+<div class="Tb" id="results">
+<table>
+<thead>
+    <tr>
+      <th scope="col">Code</th>
+      <th scope="col">Name</th>
+      <th scope="col">Departmet</th>
+      <th scope="col">Hours</th>
+      <th scope="col">Semester</th>
+    </tr>
+</thead>
+  
+  <tbody>
+  
+      {% for x in courses %}
+
+        <tr scope="row">
+        
+            <td>{{x.Code}}</td>
+            
+            
+            <td>{{x.Name}}</td>
+    
+            
+            <td>{{x.Department}}</td>
+
+            
+           <td>{{x.CreditHours}}</td>
+
+            
+           <td>{{x.Semester}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+
 {% endblock content %}

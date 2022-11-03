@@ -22,12 +22,13 @@ class Student(models.Model):
     
 class Course(models.Model):
     Code = models.CharField(max_length=10, null=True)
-    name =models.CharField(max_length=100, null=True)
+    Name =models.CharField(max_length=100, null=True)
     Department = models.ManyToManyField(Department)
-    Semester = models.IntegerField(null=True)   
+    Semester = models.IntegerField(null=True)  
+    CreditHours = models.IntegerField(null=True) 
     
     def __str__(self):
-        return self.name
+        return self.Name
 
 
     
