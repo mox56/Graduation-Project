@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    <head>
-         <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
-        <title>register</title>
-        
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}" />
+    <title>register</title>
+  </head>
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
 
-    </head>
-    <body>
-
-        <div class="wrapper fadeInDown">
-          <div id="formContent">
-            <!-- Tabs Titles -->
-        
-            <!-- Icon -->
-            <div class="fadeIn first">
-              <img src="" id="icon" alt="User Icon" />
-            </div>
-        
-            <!-- Login Form -->
-            <form action="" method="POST">
-            {% csrf_token %}  
-              {{form.username}}
-              {{form.email}}
-              {{form.password1}}
-              {{form.password2}}
-
-              {{form.errors}}
-              <button type="submit" class="fadeIn fifth" value="Log In">Register</button>
-            </form>
-        
-        
-          </div>
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img
+            src="{% static '/images/fulogo.png' %}"
+            id="icon"
+            alt="User Icon"
+          />
         </div>
-   
- </body>    
+
+        <!-- Login Form -->
+        <form action="" method="POST">
+          {% csrf_token %} {{form.username}} {{form.email}} {{form.password1}}
+          {{form.password2}} {{form.errors}}
+          <button type="submit" class="fadeIn fifth" value="Log In">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

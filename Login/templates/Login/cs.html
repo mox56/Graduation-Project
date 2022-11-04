@@ -1,79 +1,66 @@
-{% extends 'Login/main.html' %}
-
-{% block content%}
+{% extends 'Login/main.html' %} {% block content%}
 
 <div class="Tb" id="students">
   <table>
-  <thead>
-    <tr>
-      <th scope="col">Index</th>
-      <th scope="col">Name</th>
-      <th scope="col">GPA</th>
-      <th scope="col">CGPA</th>
-      <th scope="col">Semester</th>
-    </tr>
-  </thead>
-  
-  <tbody>
+    <thead>
+      <tr>
+        <th scope="col">Index</th>
+        <th scope="col">Name</th>
+        <th scope="col">GPA</th>
+        <th scope="col">CGPA</th>
+        <th scope="col">Semester</th>
+        <th scope="col">Department</th>
+      </tr>
+    </thead>
 
+    <tbody>
       {% for i in students %}
-        <tr scope="row">
-        
-            <td>{{i.index}}</td>
-            
-            
-            <td>{{i.name}}</td>
-    
-            
-            <td>3</td>
+      <tr scope="row">
+        <td>{{i.id}}</td>
 
-            
-            <td>4</td>
+        <td>{{i.name}}</td>
 
-            
-            <td>{{i.Semester}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        <td>{{i.GPA}}</td>
+
+        <td>{{i.CGPA}}4</td>
+
+        <td>{{i.Semester}}</td>
+
+        <td>{{i.Department}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 <div class="Tb" id="results">
-<table>
-<thead>
-    <tr>
-      <th scope="col">Code</th>
-      <th scope="col">Name</th>
-      <th scope="col">Departmet</th>
-      <th scope="col">Hours</th>
-      <th scope="col">Semester</th>
-    </tr>
-</thead>
-  
-  <tbody>
-  
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col">Name</th>
+        <th scope="col">Departmet</th>
+        <th scope="col">Hours</th>
+        <th scope="col">Semester</th>
+      </tr>
+    </thead>
+
+    <tbody>
       {% for x in courses %}
 
-        <tr scope="row">
-        
-            <td>{{x.Code}}</td>
-            
-            
-            <td>{{x.Name}}</td>
-    
-            
-            <td>{{x.Department}}</td>
+      <tr scope="row">
+        <td>{{x.Code}}</td>
 
-            
-           <td>{{x.CreditHours}}</td>
+        <td>{{x.Name}}</td>
 
-            
-           <td>{{x.Semester}}</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
+        <td>{{x.Department}}</td>
+
+        <td>{{x.CreditHours}}</td>
+
+        <td>{{x.Semester}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-
-
 
 {% endblock content %}

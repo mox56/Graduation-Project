@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    <head>
-         <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
-        <title>Login</title>
-        
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
 
-    </head>
-    <body>
-
-        <div class="wrapper fadeInDown">
-          <div id="formContent">
-            <!-- Tabs Titles -->
-        
-            <!-- Icon -->
-            <div class="fadeIn first">
-              <img src="" id="icon" alt="User Icon" />
-            </div>
-        
-            <!-- Login Form -->
-            <form action="" method="POST">
-            {% csrf_token %}  
-              <input type="text" id="username" class="fadeIn second" name="username" placeholder="User Name" Required>
-              <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" Required>
-
-              {% for message in messages %}
-               <p class="message"> {{message}}</p>
-              {% endfor %}
-              <input type="submit" class="fadeIn fourth" value="LogIn">
-            </form>
-        
-            
-            
-        
-          </div>
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img
+            src="{% static '/images/fulogo.png' %}"
+            id="icon"
+            alt="User Icon"
+          />
         </div>
-    </body>    
+
+        <!-- Login Form -->
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input
+            type="text"
+            id="username"
+            class="fadeIn second"
+            name="username"
+            placeholder="User Name"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            class="fadeIn third"
+            name="password"
+            placeholder="Password"
+            required
+          />
+
+          {% for message in messages %}
+          <p class="message">{{message}}</p>
+          {% endfor %}
+          <input type="submit" class="fadeIn fourth" value="LogIn" />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

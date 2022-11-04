@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Courses',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('Code', models.FloatField(max_length=10, null=True)),
                 ('name', models.CharField(max_length=100, null=True)),
             ],
@@ -22,12 +23,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Students',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('index', models.IntegerField(max_length=9, null=True)),
                 ('name', models.CharField(max_length=100, null=True)),
-                ('Department', models.CharField(max_length=100, null=True)),
+                ('Department', models.CharField(
+                    default=1, max_length=100, null=True)),
                 ('Semester', models.IntegerField(max_length=1, null=True)),
-                ('date_created', models.DateTimeField(auto_now_add=True, null=True)),
+                ('date_created', models.DateTimeField(
+                    auto_now_add=True, null=True)),
             ],
         ),
     ]

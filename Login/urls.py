@@ -9,8 +9,8 @@ from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
-    url(r'^favicom\.ico$', RedirectView.as_view(url='static/images/favicon.ico')),
-    path('login/',views.loginUser, name="login"),
+    path('', views.loginUser, name="login"),
+    path('login/', views.loginUser, name="login"),
     path('cs/', views.ComputerScience, name="cs"),
     path('register', views.register, name="register"),
     path('logout/', views.logoutUser, name="logout")

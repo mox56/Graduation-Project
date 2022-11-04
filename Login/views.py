@@ -10,65 +10,57 @@ from django.contrib.auth.decorators import login_required
 from Login.models import *
 
 # Create your views here.
-from .forms import   CreateUserForm
+from .forms import CreateUserForm
 
 
-
-def register (request):
+def register(request):
     if request.user.is_authenticated:
         return redirect('temp')
     else:
         form = CreateUserForm()
-        
-        if request.method =='POST':
+
+        if request.method == 'POST':
             form = CreateUserForm(request.POST)
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for '+ user)
-                
+                messages.success(request, 'Account was created for ' + user)
+
                 return redirect('loginUser')
-        
-        
-        
-        context= {'form':form}
+
+        context = {'form': form}
         return render(request, "Login/register.html", context)
-        
-    
-    
+
+
 def loginUser(request):
     if request.user.is_authenticated:
         return redirect('cs')
     else:
-        if request.method== 'POST':
+        if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
-            
+
             user = authenticate(request, username=username, password=password)
-            
-        
-            
+
             if user is not None:
                 login(request, user)
                 return redirect('cs')
-                
+
             else:
                 messages.info(request, 'Username OR password is incorrect')
-                
-        context = {}    
+
+        context = {}
         return render(request, "Login/login.html", context)
+
 
 def logoutUser(request):
     logout(request)
     return redirect(loginUser)
 
+
 @login_required(login_url='login')
 def ComputerScience(request):
-    courses=Course.objects.all()
-    students=Student.objects.all()
-    return render(request, "Login/cs.html", {'students':students,'courses':courses})
+    students = Student.objects.all()
+    courses = Course.objects.all()
 
-
-    
-    
-
+    return render(request, "Login/cs.html", {'students': students, 'courses': courses})
