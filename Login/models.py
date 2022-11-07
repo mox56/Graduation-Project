@@ -5,10 +5,10 @@ from django.db import models
 
 
 class Department(models.Model):
-    id = models.AutoField(primary_key=True)
     VALUE = (('Computer Science', 'Computer Science'),
              ('Information Technology', 'Information Technology'))
 
+    department_id = models.IntegerField(null=True)
     Code = models.CharField(max_length=10, null=True)
     name = models.CharField(max_length=100, null=True, choices=VALUE)
 
@@ -20,24 +20,19 @@ class Student(models.Model):
 
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100, null=True)
-    department = models.ManyToManyField(Department, null=True)
+    department = models.ForeignKey(
+        Department, null=True, on_delete=models.CASCADE)
     Semester = models.IntegerField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     CGPA = models.FloatField(null=True)
     GPA = models.FloatField(null=True)
 
-    def __str__(self):
-        return self.name
-
-
-department = Department.objects.first()
-department.student_set.all()
-
 
 class Course(models.Model):
     Code = models.CharField(max_length=10, null=True)
     Name = models.CharField(max_length=100, null=True)
-    Department = models.ManyToManyField(Department)
+    department = models.ForeignKey(
+        Department, null=True, on_delete=models.CASCADE)
     Semester = models.IntegerField(null=True)
     CreditHours = models.IntegerField(null=True)
 
