@@ -62,6 +62,5 @@ def logoutUser(request):
 def ComputerScience(request):
     Students = Student.objects.all()
     courses = Course.objects.all()
-    student = Student.objects.get(department='2')
-    course = Course.objects.filter(department='2')
-    return render(request, "Login/cs.html", {'student': student, 'course': course})
+   
+    return render(request, "Login/cs.html", {'student': Student, 'course': Course})
