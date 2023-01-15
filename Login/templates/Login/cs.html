@@ -14,7 +14,7 @@
     </thead>
 
     <tbody>
-      {% for i in students %}
+      {% for i in student %}
       <tr scope="row">
         <td>{{i.id}}</td>
 
@@ -22,7 +22,7 @@
 
         <td>{{i.GPA}}</td>
 
-        <td>{{i.CGPA}}4</td>
+        <td>{{i.CGPA}}</td>
 
         <td>{{i.Semester}}</td>
 
@@ -36,25 +36,22 @@
   <table>
     <thead>
       <tr>
-        <th scope="col">Code</th>
-        <th scope="col">Name</th>
-        <th scope="col">Departmet</th>
-        <th scope="col">Hours</th>
+        <th scope="col">Student Index</th>
+        <th scope="col">Course code</th>
+        <th scope="col">Mark</th>
         <th scope="col">Semester</th>
       </tr>
     </thead>
 
     <tbody>
-      {% for x in courses %}
+      {% for x in Examresult %}
 
       <tr scope="row">
-        <td>{{x.Code}}</td>
+        <td>{{x.student_index}}</td>
 
-        <td>{{x.Name}}</td>
+        <td>{{x.Course_code}}</td>
 
-        <td>{{x.department}}</td>
-
-        <td>{{x.CreditHours}}</td>
+        <td>{{x.Mark}}</td>
 
         <td>{{x.Semester}}</td>
       </tr>

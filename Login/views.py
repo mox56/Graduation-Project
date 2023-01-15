@@ -60,7 +60,7 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def ComputerScience(request):
-    Students = Student.objects.all()
+    examresult = ExamResult.objects.filter(department_id='2').values
     courses = Course.objects.all()
-   
-    return render(request, "Login/cs.html", {'student': Student, 'course': Course})
+    csstudents = Student.objects.filter(department_id='2')
+    return render(request, "Login/cs.html", {'student': csstudents, 'course': courses,'Examresult':examresult})

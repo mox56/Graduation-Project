@@ -8,7 +8,7 @@ class Department(models.Model):
     VALUE = (('Computer Science', 'Computer Science'),
              ('Information Technology', 'Information Technology'))
 
-    department_id = models.IntegerField(null=True)
+    department_id = models.IntegerField(primary_key=True)
     Code = models.CharField(max_length=10, null=True)
     name = models.CharField(max_length=100, null=True, choices=VALUE)
 
@@ -27,6 +27,8 @@ class Student(models.Model):
     CGPA = models.FloatField(null=True)
     GPA = models.FloatField(null=True)
 
+    def __str__(self):
+        return self.name
 
 class Course(models.Model):
     Code = models.CharField(max_length=10, null=True)
@@ -49,7 +51,11 @@ class ExamResult(models.Model):
     Course_code = models.ForeignKey(
         Course, null=True, on_delete=models.SET_NULL)
     Mark = models.CharField(max_length=50, null=True, choices=STATUS)
-    Semester = models.IntegerField(null=True)
+    Semester = models.CharField(max_length=30,null=True)
+    department = models.ForeignKey(
+        Department, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Mark
+        return self.Semester
+
+
