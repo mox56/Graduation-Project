@@ -1,0 +1,16 @@
+{% extends 'Login/main.html' %}  {% block content%} {% load static %}
+
+<div class="del">
+  <p>Are you sure you want to delete "{{student}}"?</p>
+  <br>
+  
+  <div class="del2">
+  <form action="{% url 'DeleteStudent' student.id %}" method="POST">
+    {% csrf_token %}
+    <a class="warning" href="{% url 'cs' %}"> Cancel </a>
+  
+    <input class="warning2" type="submit" name="Confirm"  value="Confirm"/>
+  </div>
+  </form>
+</div>
+{% endblock %}

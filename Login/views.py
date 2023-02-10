@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-
+from .forms import *
 from Login.models import *
 
 # Create your views here.
@@ -63,4 +63,43 @@ def ComputerScience(request):
     examresult = ExamResult.objects.filter(department_id='2').values
     courses = Course.objects.all()
     csstudents = Student.objects.filter(department_id='2')
-    return render(request, "Login/cs.html", {'student': csstudents, 'course': courses,'Examresult':examresult})
+    return render(request, "Login/cs.html", {'student': csstudents, 'course': courses, 'Examresult': examresult})
+
+
+def AddStudent(request):
+    form = Add()
+    if request.method == 'POST':
+
+        form = Add(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+
+    return render(request, "Login/AddStudent.html", context)
+
+
+def UpdateStudent(request, pk):
+    student = Student.objects.get(id=pk)
+    form = Add(instance=student)
+
+    if request.method == 'POST':
+
+        form = Add(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, "Login/UpdateStudent.html", context)
+
+
+def DeleteStudent(request, pk):
+    student = Student.objects.get(id=pk)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('/')
+
+    context = {'student': student}
+    return render(request, "Login/DeleteStudent.html", context)

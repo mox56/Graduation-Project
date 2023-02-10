@@ -10,6 +10,8 @@
         <th scope="col">CGPA</th>
         <th scope="col">Semester</th>
         <th scope="col">Department</th>
+        <th scope="col">Update Student</th>
+        <th scope="col">Delete Student</th>
       </tr>
     </thead>
 
@@ -27,10 +29,16 @@
         <td>{{i.Semester}}</td>
 
         <td>{{i.department}}</td>
+
+        <td><a href="{% url 'UpdateStudent' i.id %}">Update</a></td>
+
+        <td><a href="{% url 'DeleteStudent' i.id %}">Delete</a></td>
       </tr>
+
       {% endfor %}
     </tbody>
   </table>
+  <a class="add" href="{% url 'AddStudent' %}">Add Student</a>
 </div>
 <div class="Tb" id="results">
   <table>
@@ -58,6 +66,7 @@
       {% endfor %}
     </tbody>
   </table>
+  <a class="add" href="{% url 'AddStudent' %}">Add Student</a>
 </div>
 
 {% endblock content %}

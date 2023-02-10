@@ -17,16 +17,17 @@
   z-index: 1;
   opacity: 0.7;
   background-color: #bdbdbd;
+  overflow-x: auto;
   /*background: rgb(36, 13, 0);*/
   /*background: linear-gradient(90deg, rgba(36, 13, 0, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(221, 120, 12, 1) 100%);*/
 }
 
 table {
-  position: absolute;
+  position: static;
   z-index: 2;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  /*left: 50%;
+  top: 60%;*/
+  transform: translate(30%, 1%);
   border-radius: 12px 12px 0px 0px;
   width: 60%;
   box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
@@ -36,6 +37,18 @@ table {
   border-spacing: 0;
   overflow: hidden;
 }
+
+thead,
+tbody {
+  display: block;
+}
+
+tbody {
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 th,
 td {
   padding: 12px 15px;
@@ -104,6 +117,10 @@ header {
   color: #00889a;
 }
 
+.neu-btn:hover {
+  background-color: red;
+}
+
 button {
   padding: 9px 25px;
   color: white;
@@ -117,7 +134,168 @@ button {
 button:hover {
   background-color: rgba(0, 136, 169, 0.8);
 }
+.warning:hover {
+  background-color: #00889a;
+}
+.warning2:hover {
+  background-color: red;
+}
+
+.warning {
+  position: relative;
+  right: 30%;
+  padding: 15px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: black;
+  background-color: white;
+  color: black;
+  font-size: 13px;
+  transition: all 0.3s ease 0s;
+}
+
+.warning2 {
+  position: relative;
+  left: 20%;
+  padding: 15px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: black;
+  background-color: white;
+  color: black;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.del {
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  display: block;
+  border: 2px solid;
+  border-radius: 20px;
+  border-color: red;
+  padding: 65px 80px;
+  background-color: #bdbdbd;
+  box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
+}
+
+.del2 {
+  position: inherit;
+  display: block;
+  left: 35%;
+  top: 65%;
+}
 
 div {
   display: none;
+}
+
+.add:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.add {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  padding: 15px 20px;
+  border: 2px solid rgba(0, 136, 169, 0.8);
+  border-radius: 50px;
+  position: absolute;
+  left: 45%;
+  top: 85%;
+  background-color: white;
+}
+
+.up {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  border: 5px;
+  position: absolute;
+  left: 30%;
+  top: 80%;
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+.confirm:hover {
+  background-color: lime;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.confirm {
+  position: relative;
+  left: 30%;
+  padding: 15px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border: 1px solid;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  font-size: 13px;
+}
+
+.update {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  display: block;
+  border: 2px solid;
+  border-radius: 20px;
+  border-color: gray;
+  padding: 10px 250px 5px 200px;
+  background-color: #bdbdbd;
+  box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
+  transform: translate(-50%, -50%);
+}
+
+label {
+  margin-bottom: 10px;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+#id_id {
+  margin-bottom: 10px;
+  padding: 5px;
+  display: inline list-item;
+}
+
+#id_name {
+  margin-bottom: 10px;
+  padding: 5px;
+  display: inline list-item;
+}
+
+#id_CGPA {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+#id_department {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#id_GPA {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#id_Semester {
+  margin-bottom: 10px;
+  padding: 5px;
 }

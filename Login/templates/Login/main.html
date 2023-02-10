@@ -17,7 +17,7 @@
 <body>
 	
 	<header>
-		<img class="logo" src="{% static '/images/fulogo.png' %}" alt="logo">
+		<a href="{{request.META.HTTP_REFERER}}"><img class="logo" src="{% static '/images/fulogo.png' %}"   alt="logo"></a>
 		<nav>
 			<ul class="nav__links">
 
@@ -29,6 +29,7 @@
 		</nav>
 		<a class="cta" href="{% url 'logout'%}"><button class="neu-btn"> Log Out</button></a>
 	</header>
+	
 
 {% block content%}
 
@@ -37,7 +38,6 @@
 
 
 
-	
 
 {% endblock content%}
 </body>

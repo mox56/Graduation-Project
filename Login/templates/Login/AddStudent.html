@@ -1,0 +1,10 @@
+{% extends 'Login/main.html' %} {% load static %} {% block content%}
+
+<div class="update">
+
+  <form action="" method="POST">
+    {% csrf_token %} {{form}}
+    <input class="confirm" type="submit" name="submit" value="Add" />
+  </form>
+</div
+{% endblock %}
