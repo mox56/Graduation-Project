@@ -3,13 +3,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from .models import *
+from rest_framework import serializers
 
 
-class CreateUserForm(UserCreationForm):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "email", "password", "password")
 
     username = forms.CharField(max_length=100, widget=forms.TextInput(
         attrs={'placeholder': 'Username', 'class': 'fadeIn second'}))
@@ -21,7 +22,7 @@ class CreateUserForm(UserCreationForm):
         attrs={'placeholder': 'Re-enter Password', 'class': 'fadeIn fourth'}))
 
 
-class Add(ModelForm):
+class StudentForm(ModelForm):
     class Meta:
         model = Student
         fields = '__all__'

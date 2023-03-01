@@ -4,20 +4,20 @@
   <table>
     <thead>
       <tr>
-        <th scope="col">Index</th>
-        <th scope="col">Name</th>
-        <th scope="col">GPA</th>
-        <th scope="col">CGPA</th>
-        <th scope="col">Semester</th>
-        <th scope="col">Department</th>
-        <th scope="col">Update Student</th>
-        <th scope="col">Delete Student</th>
+        <th class="col">Student Index</th>
+        <th class="col">Name</th>
+        <th class="col">GPA</th>
+        <th class="col">CGPA</th>
+        <th class="col">Semester</th>
+        <th class="col">Department</th>
+        <th class="col">Update Student</th>
+        <th class="col">Delete Student</th>
       </tr>
     </thead>
 
     <tbody>
       {% for i in student %}
-      <tr scope="row">
+      <tr class="row">
         <td>{{i.id}}</td>
 
         <td>{{i.name}}</td>
@@ -44,17 +44,17 @@
   <table>
     <thead>
       <tr>
-        <th scope="col">Student Index</th>
-        <th scope="col">Course code</th>
-        <th scope="col">Mark</th>
-        <th scope="col">Semester</th>
+        <th class="col">Student Index</th>
+        <th class="col">Course code</th>
+        <th class="col">Mark</th>
+        <th class="col">Semester</th>
       </tr>
     </thead>
 
     <tbody>
       {% for x in Examresult %}
 
-      <tr scope="row">
+      <tr class="row">
         <td>{{x.student_index}}</td>
 
         <td>{{x.Course_code}}</td>

@@ -1,26 +1,71 @@
 from http.client import HTTPResponse
 from multiprocessing import context
-from django.http import HttpResponse
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from Login.Permissions import IsOwnerOrReadOnly
+from rest_framework import permissions
+from rest_framework.reverse import reverse
+from rest_framework.parsers import JSONParser
+from django.http import HttpResponse, JsonResponse
+from django.http import Http404
+from rest_framework import renderers
+from rest_framework.views import APIView
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from rest_framework import mixins
+from rest_framework import generics
 from Login.models import *
-
+from Login.serializers import StudentSerializer, UserSerializer
 # Create your views here.
-from .forms import CreateUserForm
+
+
+class StudentList(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all().order_by('id')
+    serializer_class = StudentSerializer
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def register(request):
     if request.user.is_authenticated:
         return redirect('temp')
     else:
-        form = CreateUserForm()
+        form = UserSerializer()
 
         if request.method == 'POST':
-            form = CreateUserForm(request.POST)
+            form = UserSerializer(request.POST)
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
@@ -67,10 +112,10 @@ def ComputerScience(request):
 
 
 def AddStudent(request):
-    form = Add()
+    form = StudentForm()
     if request.method == 'POST':
 
-        form = Add(request.POST)
+        form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
@@ -82,11 +127,11 @@ def AddStudent(request):
 
 def UpdateStudent(request, pk):
     student = Student.objects.get(id=pk)
-    form = Add(instance=student)
+    form = StudentForm(instance=student)
 
     if request.method == 'POST':
 
-        form = Add(request.POST, instance=student)
+        form = StudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
             return redirect('/')

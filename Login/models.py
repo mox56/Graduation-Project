@@ -1,5 +1,8 @@
 from random import choices
 from django.db import models
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters.html import HtmlFormatter
+from pygments import highlight
 
 # Create your models here.
 
@@ -27,8 +30,6 @@ class Student(models.Model):
     CGPA = models.FloatField(null=True)
     GPA = models.FloatField(null=True)
 
-    def __str__(self):
-        return self.name
 
 class Course(models.Model):
     Code = models.CharField(max_length=10, null=True)
@@ -51,11 +52,9 @@ class ExamResult(models.Model):
     Course_code = models.ForeignKey(
         Course, null=True, on_delete=models.SET_NULL)
     Mark = models.CharField(max_length=50, null=True, choices=STATUS)
-    Semester = models.CharField(max_length=30,null=True)
+    Semester = models.CharField(max_length=30, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.Semester
-
-
+    def __int__(self):
+        return self.student_index
