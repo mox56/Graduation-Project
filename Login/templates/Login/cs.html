@@ -4,35 +4,35 @@
   <table>
     <thead>
       <tr>
-        <th class="col">Student Index</th>
-        <th class="col">Name</th>
-        <th class="col">GPA</th>
-        <th class="col">CGPA</th>
-        <th class="col">Semester</th>
-        <th class="col">Department</th>
-        <th class="col">Update Student</th>
-        <th class="col">Delete Student</th>
+        <th width="250px" height="50px">Student Index</th>
+        <th width="500px">Name</th>
+        <th width="150px">GPA</th>
+        <th width="150px">CGPA</th>
+        <th width="150px">Semester</th>
+        <th width="400px">Department</th>
+        <th width="250px">Update Student</th>
+        <th width="250px">Delete Student</th>
       </tr>
     </thead>
 
     <tbody>
       {% for i in student %}
       <tr class="row">
-        <td>{{i.id}}</td>
+        <td class="col1">{{i.id}}</td>
 
-        <td>{{i.name}}</td>
+        <td class="col1">{{i.name}}</td>
 
-        <td>{{i.GPA}}</td>
+        <td class="col2">{{i.GPA}}</td>
 
-        <td>{{i.CGPA}}</td>
+        <td class="col3">{{i.CGPA}}</td>
 
-        <td>{{i.Semester}}</td>
+        <td class="col4">{{i.Semester}}</td>
 
-        <td>{{i.department}}</td>
+        <td class="col5">{{i.department}}</td>
 
-        <td><a href="{% url 'UpdateStudent' i.id %}">Update</a></td>
+        <td class="col6"><a href="{% url 'UpdateStudent' i.id %}">Update</a></td>
 
-        <td><a href="{% url 'DeleteStudent' i.id %}">Delete</a></td>
+        <td class="col7"><a href="{% url 'DeleteStudent' i.id %}">Delete</a></td>
       </tr>
 
       {% endfor %}
@@ -66,7 +66,114 @@
       {% endfor %}
     </tbody>
   </table>
-  <a class="add" href="{% url 'AddStudent' %}">Add Student</a>
+
+</div>
+
+<div class="Ttb" id="timetable">
+  <h1>TIME TABLE</h1>
+    <table class="Ttb">
+       <thead>
+        <tr>
+            <th align="center" height="50"
+                width="100"><br>
+                <b>Day/Period</b></br>
+            </th>
+            <th align="center" height="50"
+                width="100">
+                <b>8:00-9:00</b>
+            </th>
+            <th align="center" height="50"
+                width="100">
+                <b>11:00-1:00</b>
+            </th>
+            <th align="center" height="50"
+                width="100">
+                <b>11:10-1:00</b>
+            </th>
+            <th align="center" height="50"
+                width="100">
+                <b>1:30-3:30</b>
+            </th>
+            <th align="center" height="50"
+                width="100">
+                <b>3:30-5:30</b>
+            </th>
+        </tr>
+      </thead>
+      <tbody class="ttbody">
+        <tr>
+            <td align="center" height="50">
+                <b>Monday</b></td>
+            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">Mat</td>
+            <td align="center" height="50">Che</td>
+          
+            <td colspan="3" align="center"
+                height="50">LAB</td>
+            <td align="center" height="50">Phy</td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Tuesday</b>
+            </td>
+            <td colspan="3" align="center"
+                height="50">LAB
+            </td>
+            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">Che</td>
+            <td align="center" height="50">Mat</td>
+            <td align="center" height="50">SPORTS</td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Wednesday</b>
+            </td>
+            <td align="center" height="50">Mat</td>
+            <td align="center" height="50">phy</td>
+            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">Che</td>
+            <td colspan="3" align="center"
+                height="50">LIBRARY
+            </td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Thursday</b>
+            </td>
+            <td align="center" height="50">Phy</td>
+            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">Che</td>
+            <td colspan="3" align="center"
+                height="50">LAB
+            </td>
+            <td align="center" height="50">Mat</td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Friday</b>
+            </td>
+            <td colspan="3" align="center"
+                height="50">LAB
+            </td>
+            <td align="center" height="50">Mat</td>
+            <td align="center" height="50">Che</td>
+            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">Phy</td>
+        </tr>
+        <tr>
+            <td align="center" height="50">
+                <b>Saturday</b>
+            </td>
+            <td align="center" height="50">Eng</td>
+            <td align="center" height="50">Che</td>
+            <td align="center" height="50">Mat</td>
+            <td colspan="3" align="center"
+                height="50">SEMINAR
+            </td>
+            <td align="center" height="50">SPORTS</td>
+        </tr>
+      </tbody>
+    </table>
 </div>
 
 {% endblock content %}
