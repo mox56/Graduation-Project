@@ -21,7 +21,8 @@ class Department(models.Model):
 
 class Student(models.Model):
 
-    id = models.IntegerField(primary_key=True)
+    student_index = models.IntegerField(
+        primary_key=True, default="0", verbose_name='student_index')
     name = models.CharField(max_length=100, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)
@@ -30,9 +31,14 @@ class Student(models.Model):
     CGPA = models.FloatField(null=True)
     GPA = models.FloatField(null=True)
 
+    def __str__(self):
+        string = '{0}  {1}   '.format(self.student_index, self.name)
+        return string
+
 
 class Course(models.Model):
-    Code = models.CharField(max_length=10, null=True)
+    Code = models.CharField(max_length=10, primary_key=True,
+                            verbose_name='Code', unique=True)
     Name = models.CharField(max_length=100, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)
@@ -40,7 +46,7 @@ class Course(models.Model):
     CreditHours = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.Name
+        return self.Code
 
 
 class ExamResult(models.Model):
@@ -48,13 +54,14 @@ class ExamResult(models.Model):
         ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('F', 'F'), ('Z', 'Z')
     )
     student_index = models.ForeignKey(
-        Student, null=True, on_delete=models.SET_NULL)
+        Student, to_field='student_index', on_delete=models.PROTECT)
     Course_code = models.ForeignKey(
-        Course, null=True, on_delete=models.SET_NULL)
+        Course, to_field='Code', on_delete=models.CASCADE)
     Mark = models.CharField(max_length=50, null=True, choices=STATUS)
     Semester = models.CharField(max_length=30, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)
 
-    def __int__(self):
-        return self.student_index
+
+def __str__(self):
+    return self.student_index

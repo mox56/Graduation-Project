@@ -24,7 +24,15 @@ from rest_framework import mixins
 from rest_framework import generics
 from Login.models import *
 from Login.serializers import StudentSerializer, UserSerializer
+from .filters import SemesterFilter
 # Create your views here.
+
+
+@api_view(['GET'])
+def getStudent(request):
+    students = Student.objects.all()
+    serializer = StudentSerializer(students, many=True)
+    return Response(serializer.data)
 
 
 class StudentList(generics.ListCreateAPIView):
@@ -38,7 +46,7 @@ class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all().order_by('id')
+    queryset = Student.objects.all().order_by('student_index')
     serializer_class = StudentSerializer
 
 
@@ -105,10 +113,14 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def ComputerScience(request):
-    examresult = ExamResult.objects.filter(department_id='2').values
+    examresult = ExamResult.objects.filter(department_id='2')
     courses = Course.objects.all()
     csstudents = Student.objects.filter(department_id='2')
-    return render(request, "Login/cs.html", {'student': csstudents, 'course': courses, 'Examresult': examresult})
+
+    myFilter = SemesterFilter(request.GET, queryset=csstudents)
+    csstudents = myFilter.qs
+
+    return render(request, "Login/cs.html", {'student': csstudents, 'course': courses, 'Examresult': examresult, 'myFilter': myFilter})
 
 
 def AddStudent(request):
@@ -126,7 +138,7 @@ def AddStudent(request):
 
 
 def UpdateStudent(request, pk):
-    student = Student.objects.get(id=pk)
+    student = Student.objects.get(student_index=pk)
     form = StudentForm(instance=student)
 
     if request.method == 'POST':
@@ -141,7 +153,7 @@ def UpdateStudent(request, pk):
 
 
 def DeleteStudent(request, pk):
-    student = Student.objects.get(id=pk)
+    student = Student.objects.get(student_index=pk)
     if request.method == 'POST':
         student.delete()
         return redirect('/')

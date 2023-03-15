@@ -3,15 +3,10 @@ from Login.models import *
 from django.contrib.auth.models import User
 
 
-class StudentSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField(
-        required=False, allow_blank=True, max_length=100)
-    department = serializers.CharField(
-        required=False, allow_blank=True, max_length=100)
-    Semester = serializers.IntegerField(read_only=True)
-    CGPA = serializers.FloatField(read_only=True)
-    GPA = serializers.FloatField(read_only=True)
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
 
     def create(self, validated_data):
 

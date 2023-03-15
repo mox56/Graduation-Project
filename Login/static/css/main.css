@@ -9,7 +9,6 @@
 }
 
 .Tb {
-  
   top: 0;
   left: 0;
   right: 0;
@@ -22,22 +21,16 @@
   /*background: linear-gradient(90deg, rgba(36, 13, 0, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(221, 120, 12, 1) 100%);*/
 }
 
-.Ttb{
-  position: fixed;
-  transform: translate(140%, 12%);
-  
+@media (max-width: 700px) {
+  .table {
+  }
 }
 
-.ttbody{
-
-
-}
 table {
-  position: static;
- 
+  position: absolute;
+  left: -250px;
   transform: translate(40%, 12%);
   border-radius: 12px 12px 0px 0px;
- 
   box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
   background: #e0e0e0;
   text-align: center;
@@ -54,10 +47,6 @@ thead {
   display: table;
   height: 50px;
   width: 1037px;
-}
-
-.col {
-  padding: 10px 40px;
 }
 
 tbody {
@@ -225,8 +214,9 @@ div {
 }
 
 .add {
-  
-  transform: translate(890px, 60px);
+  position: absolute;
+  bottom: 10px;
+  left: 600px;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -235,8 +225,6 @@ div {
   padding: 15px 20px;
   border: 2px solid rgba(0, 136, 169, 0.8);
   border-radius: 50px;
-  position: fixed;
-
   background-color: white;
 }
 
@@ -323,32 +311,62 @@ label {
   padding: 5px;
 }
 
-.col1{
-  padding-right: 10px;
-padding-left: 0px;
+.col1 {
+  position: absolute;
+  left: 13px;
 }
 
-
-.col2{
-  padding-left: 0px;  
+.col2 {
+  position: absolute;
+  left: 142px;
 }
 
-.col3{
-  padding-left: 0px;
+.col3 {
+  position: absolute;
+  left: 355px;
 }
 
-.col4{
-  padding-left: 0px;
+.col4 {
+  position: absolute;
+  left: 431px;
 }
 
-.col5{
-  padding-left: 0px;
+.col5 {
+  position: absolute;
+  left: 529px;
 }
 
-.col6{
-  padding-left: 0px;
+.col6 {
+  position: absolute;
+  left: 590px;
 }
 
-.col7{
-  padding-left: 0px;
+.col7 {
+  position: absolute;
+  left: 810px;
+}
+
+.col8 {
+  position: absolute;
+  left: 933px;
+}
+
+.col9 {
+  position: absolute;
+  left: 8px;
+}
+
+.col10 {
+  position: absolute;
+  left: 351px;
+}
+
+.col11 {
+  position: absolute;
+  left: 625px;
+}
+
+.col12 {
+  position: absolute;
+  left: 880px;
 }
