@@ -22,7 +22,7 @@ class Department(models.Model):
 class Student(models.Model):
 
     student_index = models.IntegerField(
-        primary_key=True, default="0", verbose_name='student_index')
+        primary_key=True, default="0")
     name = models.CharField(max_length=100, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)
@@ -38,7 +38,7 @@ class Student(models.Model):
 
 class Course(models.Model):
     Code = models.CharField(max_length=10, primary_key=True,
-                            verbose_name='Code', unique=True)
+                            unique=True)
     Name = models.CharField(max_length=100, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)

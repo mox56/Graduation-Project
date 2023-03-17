@@ -40,9 +40,11 @@ class StudentList(generics.ListCreateAPIView):
     serializer_class = StudentSerializer
 
 
-class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+@api_view(['GET'])
+def StudentDetail(request, pk):
+    queryset = Student.objects.get(student_index=pk)
+    serializer_class = StudentSerializer(queryset)
+    return Response(serializer_class.data)
 
 
 class StudentViewSet(viewsets.ModelViewSet):
@@ -140,12 +142,12 @@ def AddStudent(request):
 def UpdateStudent(request, pk):
     student = Student.objects.get(student_index=pk)
     form = StudentForm(instance=student)
-
+    student.value = pk
     if request.method == 'POST':
 
         form = StudentForm(request.POST, instance=student)
         if form.is_valid():
-            form.save()
+            form.save(['value'])
             return redirect('/')
 
     context = {'form': form}

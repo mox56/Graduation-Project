@@ -5,6 +5,7 @@
   <form action="" method="POST">
     {% csrf_token %} {{form}}
     <input class="confirm" type="submit" name="submit" value="Add" />
+    <a class="warningADD" href="{% url 'cs' %}"> Cancel </a>
   </form>
 </div
 {% endblock %}

@@ -9,14 +9,13 @@
 }
 
 .Tb {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: absolute;
+  left: -225px;
+
   z-index: 1;
-  opacity: 0.7;
+
   background-color: #bdbdbd;
-  overflow-x: auto;
+
   /*background: rgb(36, 13, 0);*/
   /*background: linear-gradient(90deg, rgba(36, 13, 0, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(221, 120, 12, 1) 100%);*/
 }
@@ -27,8 +26,6 @@
 }
 
 table {
-  position: absolute;
-  left: -250px;
   transform: translate(40%, 12%);
   border-radius: 12px 12px 0px 0px;
   box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
@@ -148,6 +145,12 @@ button:hover {
 .warning:hover {
   background-color: #00889a;
 }
+.warningADD:hover {
+  background-color: red;
+}
+.warningUP:hover {
+  background-color: red;
+}
 .warning2:hover {
   background-color: red;
 }
@@ -249,7 +252,7 @@ div {
 
 .confirm {
   position: relative;
-  left: 30%;
+  left: 130px;
   padding: 15px 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
@@ -312,61 +315,96 @@ label {
 }
 
 .col1 {
-  position: absolute;
-  left: 13px;
+  position: relative;
+  left: -10px;
 }
 
 .col2 {
-  position: absolute;
-  left: 142px;
+  position: relative;
+  left: -40px;
 }
 
 .col3 {
-  position: absolute;
-  left: 355px;
+  position: relative;
+  left: -11px;
 }
 
 .col4 {
-  position: absolute;
-  left: 431px;
+  position: relative;
+  left: 4px;
 }
 
 .col5 {
-  position: absolute;
-  left: 529px;
+  position: relative;
+  left: 32px;
 }
 
 .col6 {
-  position: absolute;
-  left: 590px;
+  position: relative;
+  left: 46px;
 }
 
 .col7 {
-  position: absolute;
-  left: 810px;
+  position: relative;
+  left: 14px;
 }
 
 .col8 {
-  position: absolute;
-  left: 933px;
-}
-
-.col9 {
-  position: absolute;
+  position: relative;
   left: 8px;
 }
 
+.col9 {
+  position: relative;
+  left: -181px;
+}
+
 .col10 {
-  position: absolute;
-  left: 351px;
+  position: relative;
+  left: -361px;
 }
 
 .col11 {
-  position: absolute;
-  left: 625px;
+  position: relative;
+  left: -252px;
 }
 
 .col12 {
+  position: relative;
+  left: -93px;
+}
+
+.Ttb {
   position: absolute;
-  left: 880px;
+  left: 301px;
+}
+
+.warningADD {
+  position: absolute;
+  left: 167 px;
+  padding: 15px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: black;
+  background-color: white;
+  color: black;
+  font-size: 13px;
+  transition: all 0.3s ease 0s;
+}
+
+.warningUP {
+  position: absolute;
+  left: 167px;
+  padding: 15px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: black;
+  background-color: white;
+  color: black;
+  font-size: 13px;
+  transition: all 0.3s ease 0s;
 }

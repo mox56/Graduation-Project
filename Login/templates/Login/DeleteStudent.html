@@ -5,7 +5,7 @@
   <br>
   
   <div class="del2">
-  <form action="{% url 'DeleteStudent' student.id %}" method="POST">
+  <form action="{% url 'DeleteStudent' student.student_index %}" method="POST">
     {% csrf_token %}
     <a class="warning" href="{% url 'cs' %}"> Cancel </a>
   
