@@ -1,51 +1,5 @@
 {% extends 'Login/main.html' %} {% block content%}
 
-<div class="Tb"id="students">
-  <table class="Tb">
-    <thead>
-      <tr>
-        <th width="250px" height="30px">Student Index</th>
-        <th width="500px" height="30px">Name</th>
-        <th width="150px" height="30px">GPA</th>
-        <th width="150px" height="30px">CGPA</th>
-        <th width="150px" height="30px">Semester</th>
-        <th width="400px" height="30px">Department</th>
-        <th width="250px" height="30px">Update Student</th>
-        <th width="250px" height="30px">Delete Student</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {% for i in student %}
-       <tr class="row">
-        <td class="col1">{{i.student_index}}</td>
-
-        <td class="col2">{{i.name}}</td>
-
-        <td class="col3">{{i.GPA}}</td>
-
-        <td class="col4">{{i.CGPA}}</td>
-
-        <td class="col5">{{i.Semester}}</td>
-
-        <td class="col6">{{i.department}}</td>
-
-        <td class="col7"><a href="{% url 'UpdateStudent' i.student_index %}">Update</a></td>
-
-        <td class="col8"><a href="{% url 'DeleteStudent' i.student_index %}">Delete</a></td>
-      </tr>
-
-      {% endfor %}
-    </tbody>
-  </table>
-<form method="GET">
-  {{myFilter.form}}
-
-  <button class="" type = "submit">search</buttn>
-
-  </form>
-
-  <a class="add" href="{% url 'AddStudent' %}">Add Student</a>
 
 </div>
 <div class="Tb" id="results">
@@ -56,6 +10,8 @@
         <th width="300px" height="30px">Course code</th>
         <th width="300px" height="30px">Mark</th>
         <th width="300px" height="30px">Semester</th>
+        <th width="250px" height="30px">Update Result</th>
+        <th width="250px" height="30px">Delete Result</th>
       </tr>
     </thead>
 
@@ -63,18 +19,22 @@
       {% for x in Examresult %}
 
       <tr class="row">
-        <td class="col9">{{x.student_index}}</td>
+        <td  class = "col9">{{x.student_index}}</td>
 
-        <td class="col10">{{x.Course_code}}</td>
+        <td class = "col10">{{x.Course_code}}</td>
 
-        <td class="col11">{{x.Mark}}</td>
+        <td >{{x.Mark}}</td>
 
         <td class="col12">{{x.Semester}}</td>
+
+        <td class="col13"><a href="{% url 'UpdateResult' x.student_index %}">Update</a></td>
+
+        <td class="col14"><a href="{% url 'DeleteResult' x.student_index %}">Delete</a></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-
+  <a class="add" href="{% url 'AddResult' %}">Add result</a>
 </div>
 
 <div class="Ttb" id="timetable">

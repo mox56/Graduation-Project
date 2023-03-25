@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+	<script type=text/javascript src="{% static 'js/main.js' %}"></script>
+	
+<title>Main</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+</head>
+<body>
+	
+	<header>
+		<a href="{{request.META.HTTP_REFERER}}"><img class="logo" src="{% static '/images/fulogo.png' %}"   alt="logo"></a>
+		<nav>
+			<ul class="nav__links">
+
+				<h1> F & Z students </h1>
+
+			</ul>
+		</nav>
+		<a class="cta" href="{% url 'logout'%}"><button class="neu-btn"> Log Out</button></a>
+	</header>
+	{% block content %}
+    <table class="Tb">
+        <thead>
+          <tr>
+            <th width="250px" height="30px">Student Index</th>
+            <th width="500px" height="30px">Name</th>
+            <th width="150px" height="30px">Semester</th>
+            <th width="400px" height="30px">Department</th>
+            <th width="250px" height="30px">Update Student</th>
+            <th width="250px" height="30px">Delete Student</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          {% for i in student %}
+           <tr class="row">
+            <td>{{i.student_index}}</td>
+    
+            <td>{{i.name}}</td>
+    
+            
+            <td>{{i.Semester}}</td>
+    
+            <td>{{i.department}}</td>
+    
+            <td><a href="{% url 'UpdateStudent' i.student_index %}">Update</a></td>
+    
+            <td><a href="{% url 'DeleteStudent' i.student_index %}">Delete</a></td>
+          </tr>
+    
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <a class="add" href="{% url 'AddStudent' %}">Add Student</a>
+
+
+      {% endblock content%}
+</body>
+</html>

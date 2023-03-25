@@ -3,8 +3,8 @@
 <div class="update">
   <form action="" method="POST">
     {% csrf_token %} {{form}}
-    <input class="confirm" type="submit" name="submit" value="Confirm" />
-    <a class="warningUP" href="{% url 'Registrar' %}"> Cancel </a>
+    <input class="confirm" type="submit" name="submit" value="Add" />
+    <a class="warningADD" href="{% url 'DataEntry' %}"> Cancel </a>
   </form>
 </div>
 {% endblock %}

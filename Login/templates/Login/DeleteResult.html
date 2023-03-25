@@ -1,4 +1,4 @@
-{% extends 'Login/Registrar.html' %}  {% block content%} {% load static %}
+{% extends 'Login/DataEntry.html' %}  {% block content%} {% load static %}
 
 <div class="del">
   <p>Are you sure you want to delete "{{student}}"?</p>
@@ -7,7 +7,7 @@
   <div class="del2">
   <form action="{% url 'DeleteStudent' student.student_index %}" method="POST">
     {% csrf_token %}
-    <a class="warning" href="{% url 'Registrar' %}"> Cancel </a>
+    <a class="warning" href="{% url 'DataEntry' %}"> Cancel </a>
   
     <input class="warning2" type="submit" name="Confirm"  value="Confirm"/>
   </div>

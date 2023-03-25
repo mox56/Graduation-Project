@@ -3,8 +3,15 @@ from django.db import models
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 # Create your models here.
+
+
+class User(AbstractUser):
+    is_admin = models.BooleanField('is_admin', default=False)
+    is_registrar = models.BooleanField('is_registrar', default=False)
+    is_dataentry = models.BooleanField('is_dataentry', default=False)
 
 
 class Department(models.Model):
@@ -28,11 +35,9 @@ class Student(models.Model):
         Department, null=True, on_delete=models.CASCADE)
     Semester = models.IntegerField(null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    CGPA = models.FloatField(null=True)
-    GPA = models.FloatField(null=True)
 
     def __str__(self):
-        string = '{0}  {1}   '.format(self.student_index, self.name)
+        string = '{0}'.format(self.student_index)
         return string
 
 
@@ -50,14 +55,12 @@ class Course(models.Model):
 
 
 class ExamResult(models.Model):
-    STATUS = (
-        ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('F', 'F'), ('Z', 'Z')
-    )
-    student_index = models.ForeignKey(
+
+    student_index = models.OneToOneField(
         Student, to_field='student_index', on_delete=models.PROTECT)
     Course_code = models.ForeignKey(
         Course, to_field='Code', on_delete=models.CASCADE)
-    Mark = models.CharField(max_length=50, null=True, choices=STATUS)
+    Mark = models.CharField(max_length=50, null=True)
     Semester = models.CharField(max_length=30, null=True)
     department = models.ForeignKey(
         Department, null=True, on_delete=models.CASCADE)

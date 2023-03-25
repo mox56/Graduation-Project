@@ -136,6 +136,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = "Login.User"
 
 # SECURE_SSL_REDIRECT = False
 # SESSION_COOKIE_SECURE = False

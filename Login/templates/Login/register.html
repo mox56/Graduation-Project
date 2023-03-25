@@ -23,9 +23,12 @@
         <form action="" method="POST">
           {% csrf_token %} {{form.username}} {{form.email}} {{form.password1}}
           {{form.password2}} {{form.errors}}
-          <button type="submit" class="fadeIn fifth" value="Log In">
-            Register
-          </button>
+           {{form.is_admin}} Admin
+            {{form.is_registrar}}Registrar {{form.is_dataentry}}Data Entry
+            <button type="submit" class="fadeIn fifth" value="Log In">
+              Register
+            </button>
+          </p>
         </form>
       </div>
     </div>

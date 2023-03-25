@@ -20,11 +20,6 @@
   /*background: linear-gradient(90deg, rgba(36, 13, 0, 1) 0%, rgba(121, 37, 9, 1) 41%, rgba(221, 120, 12, 1) 100%);*/
 }
 
-@media (max-width: 700px) {
-  .table {
-  }
-}
-
 table {
   transform: translate(40%, 12%);
   border-radius: 12px 12px 0px 0px;
@@ -356,12 +351,12 @@ label {
 
 .col9 {
   position: relative;
-  left: -181px;
+  left: -34px;
 }
 
 .col10 {
   position: relative;
-  left: -361px;
+  left: -67px;
 }
 
 .col11 {
@@ -371,7 +366,17 @@ label {
 
 .col12 {
   position: relative;
-  left: -93px;
+  left: 86px;
+}
+
+.col13 {
+  position: relative;
+  left: 99px;
+}
+
+.col14 {
+  position: relative;
+  left: 31px;
 }
 
 .Ttb {

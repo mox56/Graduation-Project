@@ -68,28 +68,24 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+@login_required(login_url='login')
 def register(request):
-    if request.user.is_authenticated:
-        return redirect('temp')
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account was created for ' + user)
+
+            return redirect('login')
     else:
-        form = UserSerializer()
-
-        if request.method == 'POST':
-            form = UserSerializer(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
-
-                return redirect('loginUser')
-
-        context = {'form': form}
-        return render(request, "Login/register.html", context)
+        form = SignUpForm()
+    return render(request, "Login/register.html", {'form': form})
 
 
 def loginUser(request):
     if request.user.is_authenticated:
-        return redirect('cs')
+        return redirect('DataEntry')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -97,12 +93,17 @@ def loginUser(request):
 
             user = authenticate(request, username=username, password=password)
 
-            if user is not None:
+            if user is not None and user.is_dataentry:
                 login(request, user)
-                return redirect('cs')
+                return redirect('DataEntry')
+
+            elif user is not None and user.is_registrar:
+                login(request, user)
+                return redirect('Registrar')
 
             else:
-                messages.info(request, 'Username OR password is incorrect')
+                messages.info(
+                    request, 'Username OR password is incorrect OR your not allowed to view page.')
 
         context = {}
         return render(request, "Login/login.html", context)
@@ -114,15 +115,23 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
-def ComputerScience(request):
-    examresult = ExamResult.objects.filter(department_id='2')
+def DataEntry(request):
+    # examresult = ExamResult.objects.filter(department_id='2')
+    examresult = ExamResult.objects.all()
     courses = Course.objects.all()
-    csstudents = Student.objects.filter(department_id='2')
+    students = Student.objects.all()
+    # csstudents = Student.objects.filter(department_id='2')
 
-    myFilter = SemesterFilter(request.GET, queryset=csstudents)
-    csstudents = myFilter.qs
+    # myFilter = SemesterFilter(request.GET, queryset=csstudents)
+    # csstudents = myFilter.qs
 
-    return render(request, "Login/cs.html", {'student': csstudents, 'course': courses, 'Examresult': examresult, 'myFilter': myFilter})
+    return render(request, "Login/DataEntry.html", {'student': students, 'course': courses, 'Examresult': examresult})
+
+
+@login_required(login_url='login')
+def Registrar(request):
+    students = Student.objects.all()
+    return render(request, "Login/Registrar.html", {'student': students})
 
 
 def AddStudent(request):
@@ -132,7 +141,7 @@ def AddStudent(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('Registrar')
 
     context = {'form': form}
 
@@ -148,7 +157,7 @@ def UpdateStudent(request, pk):
         form = StudentForm(request.POST, instance=student)
         if form.is_valid():
             form.save(['value'])
-            return redirect('/')
+            return redirect('Registrar')
 
     context = {'form': form}
     return render(request, "Login/UpdateStudent.html", context)
@@ -162,3 +171,42 @@ def DeleteStudent(request, pk):
 
     context = {'student': student}
     return render(request, "Login/DeleteStudent.html", context)
+
+
+def AddResult(request):
+    form = ExamForm()
+    if request.method == 'POST':
+
+        form = ExamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Dataentry')
+
+    context = {'form': form}
+
+    return render(request, "Login/AddResult.html", context)
+
+
+def UpdateResult(request, pk):
+    examresult = ExamResult.objects.get(student_index=pk)
+    form = StudentForm(instance=examresult)
+    examresult.value = pk
+    if request.method == 'POST':
+
+        form = ExamForm(request.POST, instance=examresult)
+        if form.is_valid():
+            form.save(['value'])
+            return redirect('DataEntry')
+
+    context = {'form': form}
+    return render(request, "Login/UpdateResult.html", context)
+
+
+def DeleteResult(request, pk):
+    examresult = ExamResult.objects.get(student_index=pk)
+    if request.method == 'POST':
+        examresult.delete()
+        return redirect('/')
+
+    context = {'examresult': examresult}
+    return render(request, "Login/DeleteResult.html", context)

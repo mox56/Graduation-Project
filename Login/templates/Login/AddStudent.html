@@ -1,11 +1,10 @@
-{% extends 'Login/main.html' %} {% load static %} {% block content%}
+{% extends 'Login/Registrar.html' %} {% load static %} {% block content%}
 
 <div class="update">
-
   <form action="" method="POST">
     {% csrf_token %} {{form}}
     <input class="confirm" type="submit" name="submit" value="Add" />
-    <a class="warningADD" href="{% url 'cs' %}"> Cancel </a>
+    <a class="warningADD" href="{% url 'Registrar' %}"> Cancel </a>
   </form>
-</div
+</div>
 {% endblock %}
