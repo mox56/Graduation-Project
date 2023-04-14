@@ -58,7 +58,7 @@ class ExamResult(models.Model):
 
     student_index = models.OneToOneField(
         Student, to_field='student_index', on_delete=models.PROTECT)
-    Course_code = models.ForeignKey(
+    Course_code = models.OneToOneField(
         Course, to_field='Code', on_delete=models.CASCADE)
     Mark = models.CharField(max_length=50, null=True)
     Semester = models.CharField(max_length=30, null=True)

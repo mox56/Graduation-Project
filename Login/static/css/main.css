@@ -10,10 +10,9 @@
 
 .Tb {
   position: absolute;
-  left: -225px;
-
+  top: 215px;
+  left: 169px;
   z-index: 1;
-
   background-color: #bdbdbd;
 
   /*background: rgb(36, 13, 0);*/
@@ -21,7 +20,6 @@
 }
 
 table {
-  transform: translate(40%, 12%);
   border-radius: 12px 12px 0px 0px;
   box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
   background: #e0e0e0;
@@ -166,8 +164,9 @@ button:hover {
 }
 
 .warning2 {
-  position: relative;
-  left: 20%;
+  position: absolute;
+  left: 84px;
+  top: -15px;
   padding: 15px 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
@@ -266,16 +265,21 @@ div {
   border: 2px solid;
   border-radius: 20px;
   border-color: gray;
-  padding: 10px 250px 5px 200px;
-  background-color: #bdbdbd;
+  padding: 22px 157px 19px 102px;
+  background-color: #ffcc8f;
   box-shadow: 0 5px 12px rgba(32, 32, 32, 0.3);
   transform: translate(-50%, -50%);
 }
 
 label {
+  font-size: unset;
   margin-bottom: 10px;
-  justify-content: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: "ui-monospace";
+}
+
+#id_student_index {
+  margin-bottom: 10px;
+  padding: 5px;
 }
 
 #id_id {
@@ -305,6 +309,16 @@ label {
 }
 
 #id_Semester {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#id_Mark {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#id_Course_code {
   margin-bottom: 10px;
   padding: 5px;
 }
@@ -385,8 +399,9 @@ label {
 }
 
 .warningADD {
-  position: absolute;
-  left: 167 px;
+  position: relative;
+  left: -32 px;
+  top: -33px;
   padding: 15px 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
@@ -401,7 +416,7 @@ label {
 
 .warningUP {
   position: absolute;
-  left: 167px;
+  left: 45px;
   padding: 15px 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
@@ -412,4 +427,82 @@ label {
   color: black;
   font-size: 13px;
   transition: all 0.3s ease 0s;
+}
+
+form {
+  width: 100px;
+}
+
+.calendar {
+  width: 98%;
+  margin: auto;
+  font-size: 13px;
+}
+
+.calendar tr,
+.calendar td {
+  border: 1px solid black;
+}
+
+.calendar th {
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.calendar td {
+  width: 200px;
+  height: 150px;
+  padding: 20px 0px 0px 5px;
+}
+
+.month {
+  font-size: 25px;
+}
+
+.date {
+  font-size: 16px;
+}
+
+ul {
+  height: 100%;
+  padding: 0px 5px 0px 20px;
+}
+
+a {
+  color: #17a2b8;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.btn {
+  outline: none;
+  color: black;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+}
+
+.clearfix {
+  margin: 15px;
+}
+
+.form {
+  margin: auto;
+}
+
+.form input,
+.form select,
+.form textarea {
+  border-radius: 5px;
+  border: 1px solid #17a2b8;
+  outline: none;
+  background: none;
+  padding: 5px;
+  width: 100%;
 }

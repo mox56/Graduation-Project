@@ -1,11 +1,11 @@
 {% extends 'Login/DataEntry.html' %}  {% block content%} {% load static %}
 
 <div class="del">
-  <p>Are you sure you want to delete "{{student}}"?</p>
+  <p>Are you sure you want to delete "{{examresult.student_index}}" Result ?</p>
   <br>
   
   <div class="del2">
-  <form action="{% url 'DeleteStudent' student.student_index %}" method="POST">
+  <form action="{% url 'DeleteResult' examresult.student_index %}" method="POST">
     {% csrf_token %}
     <a class="warning" href="{% url 'DataEntry' %}"> Cancel </a>
   

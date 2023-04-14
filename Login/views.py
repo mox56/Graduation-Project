@@ -189,7 +189,7 @@ def AddResult(request):
 
 def UpdateResult(request, pk):
     examresult = ExamResult.objects.get(student_index=pk)
-    form = StudentForm(instance=examresult)
+    form = ExamForm(instance=examresult)
     examresult.value = pk
     if request.method == 'POST':
 
