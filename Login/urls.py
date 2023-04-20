@@ -6,12 +6,16 @@ from django.conf import settings
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-
+from .views import RegisterAPI
 from django.urls import include, path
 from rest_framework import routers
 from Login.models import *
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from knox import views as knox_views
+from .views import LoginAPI
+
+
 
 
 router = routers.DefaultRouter()
@@ -40,5 +44,9 @@ urlpatterns = [
     path('UpdateResult/<str:pk>/', views.UpdateResult, name="UpdateResult"),
     path('DeleteResult/<str:pk>/', views.DeleteResult, name="DeleteResult"),
     path('AddResult/', views.AddResult, name="AddResult"),
+    path('api/register/', views.RegisterAPI.as_view(), name='register'),
+    path('api/login/',views.LoginAPI.as_view(), name='login'),
+    path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
+    path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns = format_suffix_patterns(urlpatterns)
