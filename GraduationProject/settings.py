@@ -28,7 +28,8 @@ SECRET_KEY = 'django-insecure-o63_rw7bl&o%+=g8+xowekni-x=b7s&34g^&7by)an4zv0vkrh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.localhost', '[::1]', '172.20.10.2', '127.0.0.1','192.168.0.7']
+ALLOWED_HOSTS = ['.localhost', '[::1]',
+                 '172.20.10.8', '127.0.0.1', '192.168.0.7']
 
 
 # Application definition
@@ -42,9 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'knox',
     'rest_framework.authtoken',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -115,14 +115,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
-    "NON_FIELD_ERRORS_KEY":"errors",
+    "NON_FIELD_ERRORS_KEY": "errors",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        
+
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-     "rest_framework.permissions.IsAuthenticated"
+        "rest_framework.permissions.IsAuthenticated"
     ]
 }
 
@@ -137,6 +137,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+CSRF_COOKIE_SECURE = False
+
+CSRF_COOKIE_HTTPONLY = False
+
+SESSION_COOKIE_SECURE = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

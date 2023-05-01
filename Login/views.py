@@ -21,12 +21,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from rest_framework import mixins
-from rest_framework import generics,status
+from rest_framework import generics, status
 from Login.models import *
 from Login.serializers import StudentSerializer, UserSerializer
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-from knox.models import AuthToken
+
 from .serializers import UserSerializer, RegisterSerializer
 from django.contrib.auth import login
 from rest_framework import permissions
@@ -37,51 +37,54 @@ from rest_framework.request import Request
 
 
 class LoginAPI(APIView):
-    permission_classes=[]
+    permission_classes = []
 
-    def post(self, request:Request):
-        username= request.data.get('username')
-        password= request.data.get('password')
+    def post(self, request: Request):
+        username = request.data.get('username')
+        password = request.data.get('password')
 
         user = authenticate(username=username, password=password)
-        
+
         if user is not None:
-            response={
+            response = {
                 "message": "Login successfull",
                 "token": user.auth_token.key
             }
             return Response(data=response, status=status.HTTP_200_OK)
         else:
-            return Response(data={"message":"Invalid username or password"})
+            return Response(data={"message": "Invalid username or password"})
+
     def get(self, request: Request):
-        content={
-            "user":str(request.user),
-            "auth":str(request.auth)
+        content = {
+            "user": str(request.user),
+            "auth": str(request.auth)
         }
-        
+
         return Response(data=content, status=status.HTTP_200_OK)
 
 # Register API
+
+
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
-    def post(self,request:Request):
+    def post(self, request: Request):
         data = request.data
 
-        serializer=self.serializer_class(data=data)
+        serializer = self.serializer_class(data=data)
 
         if serializer.is_valid():
             serializer.save()
 
-            response={
-                "message":"User Created Successfully",
-                "data":serializer.data
+            response = {
+                "message": "User Created Successfully",
+                "data": serializer.data
             }
 
-            return Response(data=response,status=status.HTTP_201_CREATED)
-       
-        return Response(data=serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-    
+            return Response(data=response, status=status.HTTP_201_CREATED)
+
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 def getStudent(request):
