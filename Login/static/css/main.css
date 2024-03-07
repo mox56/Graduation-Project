@@ -7,11 +7,18 @@
   outline: 0;
   box-sizing: border-box;
 }
+.TTb {
+  position: absolute;
+  top: 215px;
+  left: 168px;
+  z-index: 1;
+  background-color: #bdbdbd;
+}
 
 .Tb {
   position: absolute;
   top: 215px;
-  left: 169px;
+  left: 100px;
   z-index: 1;
   background-color: #bdbdbd;
 
@@ -55,12 +62,14 @@ tr {
 }
 
 td {
-  padding: 12px 15px;
+  font-size: medium;
+  font-weight: bold;
+  padding: 12px 70px;
   text-transform: uppercase;
   font-family: "Roboto", sans-serif;
 }
 th {
-  background: #8d6e63;
+  background: #43434c;
 }
 
 tr:nth-child(odd) {
@@ -86,9 +95,9 @@ header {
   background: rgb(36, 13, 0);
   background: linear-gradient(
     90deg,
-    rgba(221, 120, 12, 1) 0%,
-    rgba(121, 37, 9, 1) 41%,
-    rgba(36, 13, 0, 1) 90%
+    #43434c 100%,
+
+    #d65108 90%
   );
   border-bottom: 1px solid #676767;
   z-index: 2;
@@ -102,6 +111,7 @@ header {
 
 .nav__links {
   list-style-type: none;
+  color: white;
 }
 
 .nav__links li {
@@ -204,12 +214,31 @@ div {
   display: none;
 }
 
-.add:hover {
+.filter:hover {
   background-color: rgba(0, 136, 169, 0.8);
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
 
+.filter {
+  position: absolute;
+  bottom: 10px;
+  left: 800px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  padding: 15px 20px;
+  border: 2px solid rgba(0, 136, 169, 0.8);
+  border-radius: 50px;
+  background-color: white;
+}
+.add:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
 .add {
   position: absolute;
   bottom: 10px;
@@ -370,7 +399,7 @@ label {
 
 .col10 {
   position: relative;
-  left: -67px;
+  left: -33px;
 }
 
 .col11 {
@@ -380,12 +409,12 @@ label {
 
 .col12 {
   position: relative;
-  left: 86px;
+  left: -7px;
 }
 
 .col13 {
   position: relative;
-  left: 99px;
+  left: 34px;
 }
 
 .col14 {

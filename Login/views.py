@@ -2,13 +2,14 @@ from http.client import HTTPResponse
 from multiprocessing import context
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 from Login.Permissions import IsOwnerOrReadOnly
 from rest_framework import permissions
 from rest_framework.reverse import reverse
-from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponse, JsonResponse
 from django.http import Http404
 from rest_framework import renderers
@@ -20,13 +21,13 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from rest_framework import mixins
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework import generics, status
 from Login.models import *
-from Login.serializers import StudentSerializer, UserSerializer
+from Login.serializers import *
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-
+from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer, RegisterSerializer
 from django.contrib.auth import login
 from rest_framework import permissions
@@ -34,6 +35,36 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework. response import Response
 from rest_framework.request import Request
 # Create your views here.
+
+
+@api_view(['POST'])
+def logintest(request):
+    user = get_object_or_404(User, username=request.data['username'])
+    if not user.check_password(request.data['password']):
+        return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
+    token, created = Token.objects.get_or_create(user=user)
+    serializer = UserSerializer(instance=user)
+    return Response({"token": token.key, "user": serializer.data})
+
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def test_token(request):
+    return Response("passed for {}".format(request.user.username))
+
+
+@api_view(['POST'])
+def signuptest(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        user = User.objects.get(username=request.data['username'])
+        user.set_password(request.data['password'])
+        user.save()
+        token = Token.objects.create(user=user)
+        return Response({"token": token.key, "user": serializer.data})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginAPI(APIView):
@@ -104,11 +135,133 @@ def StudentDetail(request, pk):
     serializer_class = StudentSerializer(queryset)
     return Response(serializer_class.data)
 
+@api_view(['GET', 'PUT', 'DELETE'])
+def exam_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        exam = ExamResult.objects.get(pk=pk)
+    except ExamResult.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ExamSerializer(exam)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ExamSerializer(exam, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        exam.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ExamView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = ExamSerializer
+    def get (self, request,pk):
+        single_exam = ExamResult.objects.get(id = pk)
+        serializers = ExamSerializer(single_exam)
+        return Response(serializers.data)
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        # Assuming you have a serializer for ExamResult
+        exam_serializer = ExamSerializer(data=request.data, partial=True)
+        exam_serializer.is_valid(raise_exception=True)
+
+        # Find the exam instance based on the provided 'id'
+        exam_id = exam_serializer.validated_data['id']
+        
+        # Access the related set of exams for the specific student
+        exam_instance = instance.Exams_Results.get(id=exam_id)
+
+        # Update the 'requested' field
+        exam_instance.requested = exam_serializer.validated_data['requested']
+        exam_instance.save()
+
+        # You might need to update the student serializer as well if needed
+        serializer = self.get_serializer(instance)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+ 
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all().order_by('student_index')
     serializer_class = StudentSerializer
 
+class StudentListView(APIView):
+    def get(Self, request):
+        all_student= Student.objects.all()
+        serializers =StudentListSerializer(all_student,many = True)
+        return Response(serializers.data)
+    
+class StudentListDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentListSerializer
+    
+class StudentDetailView(generics.RetrieveUpdateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentListSerializer
+
+    def get(self, request, pk):
+        instance = self.get_object()
+        Single_student= Student.objects.get(pk= pk)
+        serializer =StudentListSerializer(Single_student)
+        return Response(serializer.data)
+    
+def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        # Assuming you have a serializer for ExamResult
+        exam_serializer = ExamSerializer(data=request.data, partial=True)
+        exam_serializer.is_valid(raise_exception=True)
+
+        # Find the exam instance based on the provided 'id'
+        exam_id = exam_serializer.validated_data['id']
+        
+        # Access the related set of exams for the specific student
+        exam_instance = instance.Exams_Results.get(id=exam_id)
+
+        # Update the 'requested' field
+        exam_instance.requested = exam_serializer.validated_data['requested']
+        exam_instance.save()
+
+        # You might need to update the student serializer as well if needed
+        serializer = self.get_serializer(instance)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+def ExamResults(request, pk):
+    queryset = ExamResult.objects.get(student_index=pk)
+    serializer_class = ExamSerializer(queryset)
+    return Response(serializer_class.data)
+
+class ExamList(generics.ListAPIView):
+    serializer_class = ExamSerializer
+
+    def get_queryset(self):
+        return ExamResult.objects.filter(student_index=self.kwargs['student_index'])
+    
+class studentdetail(generics.RetrieveAPIView):
+    def get(self,request, pk):
+        queryset = Student.objects.get(student_index = pk)
+        serializer_class = StudentListSerializer(queryset)
+        lookup_field = 'student_index'
+
+   
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
@@ -135,7 +288,7 @@ def register(request):
             user = form.cleaned_data.get('username')
             messages.success(request, 'Account was created for ' + user)
 
-            return redirect('login')
+            return redirect('register')
     else:
         form = SignUpForm()
     return render(request, "Login/register.html", {'form': form})
@@ -238,7 +391,7 @@ def AddResult(request):
         form = ExamForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Dataentry')
+            return redirect('DataEntry')
 
     context = {'form': form}
 

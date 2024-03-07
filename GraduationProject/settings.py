@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-o63_rw7bl&o%+=g8+xowekni-x=b7s&34g^&7by)an4zv0vkrh
 DEBUG = True
 
 ALLOWED_HOSTS = ['.localhost', '[::1]',
-                 '172.20.10.8', '127.0.0.1', '192.168.0.7']
+                 '172.20.10.8', '127.0.0.1', '192.168.218.175','10.0.2.16','172.20.10.2',]
 
 
 # Application definition
@@ -116,14 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "NON_FIELD_ERRORS_KEY": "errors",
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    "DEFAULT_PERMISSION_CLASSES": []
 
-    ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated"
-    ]
 }
 
 # Internationalization
@@ -157,6 +152,7 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "Login.User"
+
 
 # SECURE_SSL_REDIRECT = False
 # SESSION_COOKIE_SECURE = False
